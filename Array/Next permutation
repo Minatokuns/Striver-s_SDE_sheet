@@ -1,0 +1,39 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;
+        if(n==1)
+            return;
+        int peakIndex = -1;
+        //finding peak index 1 2 5 4 3 (5 is peak in graph)
+        for(int i = 1; i<n;i++){
+            if(nums[i]>nums[i-1])
+                peakIndex = i;
+        }
+        if(peakIndex==-1){
+            reverse(0,n-1,nums);
+            return;
+        }
+        int swapIndex = peakIndex;
+        int j = peakIndex;
+        //edge case 1 2 5 4 3 ..nrmmlly peakindex is swap with peakindex-1 but here there is 3 present on the right side which makes us swap peakindex-1 with 3
+        while(++j < n){
+            if(nums[j]>nums[swapIndex-1] && nums[j]<=nums[swapIndex])
+                peakIndex = j;
+        }
+        swap(swapIndex-1,peakIndex,nums);
+        reverse(swapIndex,n-1,nums);
+        return;
+    }
+    void swap(int i,int j,int[] nums){
+        int temp = nums[i];
+        nums[i]= nums[j];
+        nums[j]= temp;
+    }
+    void reverse(int i, int j , int[] nums){
+        while(i<j){
+            swap(i,j,nums);
+            i++;
+            j--;
+        }
+    }
+}
