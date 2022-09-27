@@ -3,6 +3,7 @@ class Solution {
         int min = prices[0], max = 0;
         
         for(int i=0; i<prices.length; i++){
+        //checking if price is greater thn profit check ,if its less we buy at that bcoz 2 to 6 is 4 rpofit but 2 1 6 thn 1 is buy and selling 6 so 5 rpofit no point in staying at 2 bcoz anything after 2 is also coming after 1 so 1 obvious more profitable 
             if(prices[i] > min){
                 max = Math.max(max, prices[i] - min);
             }
